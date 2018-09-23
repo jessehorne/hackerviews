@@ -90,15 +90,36 @@ get "/post/new/:page" do |env|
 end
 
 get "/post/top/:page" do |env|
+	page_num = env.params.url["page"].to_i
 
+	limit = 2
+	offset = (limit * page_num) - limit
+
+	posts = Post.all("ORDER BY ups DESC LIMIT #{limit} OFFSET #{offset}").to_json
+
+	posts
 end
 
 get "/post/show/:page" do |env|
+	page_num = env.params.url["page"].to_i
 
+	limit = 2
+	offset = (limit * page_num) - limit
+
+	posts = Post.all("WHERE title LIKE '%SHOW HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+
+	posts
 end
 
 get "/post/ask/:page" do |env|
+	page_num = env.params.url["page"].to_i
 
+	limit = 2
+	offset = (limit * page_num) - limit
+
+	posts = Post.all("WHERE title LIKE '%ASK HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+
+	posts
 end
 
 get "/post/jobs/:page" do |env|
