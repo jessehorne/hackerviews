@@ -77,3 +77,30 @@ get "/post/:post_url" do |env|
 		render "src/views/read.ecr", "src/views/layout.ecr"
 	end
 end
+
+get "/post/new/:page" do |env|
+	page_num = env.params.url["page"].to_i
+
+	limit = 2
+	offset = (limit * page_num) - limit
+
+	posts = Post.all("ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+
+	posts
+end
+
+get "/post/top/:page" do |env|
+
+end
+
+get "/post/show/:page" do |env|
+
+end
+
+get "/post/ask/:page" do |env|
+
+end
+
+get "/post/jobs/:page" do |env|
+
+end

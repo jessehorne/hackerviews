@@ -31,7 +31,6 @@ User.migrator.drop_and_create
 Post.migrator.drop_and_create
 Comment.migrator.drop_and_create
 
-
 # Session Configuration
 Kemal::Session.config do |config|
 	config.cookie_name = "kemal_sessid"
