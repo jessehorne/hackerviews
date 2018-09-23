@@ -3,7 +3,7 @@ class Post < Granite::Base
 	timestamps
 	field title : String
 	field url : String
-	field user_id : Int64
+	field username : String
 	field text : String
 	field ups : Int32
 	field downs : Int32

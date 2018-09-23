@@ -28,8 +28,8 @@ post "/post/submit" do |env|
 	new_post = Post.new
 	new_post.title = env.params.body["title"].as(String)
 	new_post.text = env.params.body["text"].as(String)
-	new_post.url = Random::Secure.urlsafe_base64(8, padding: true)
-	new_post.user_id = env.session.bigint("user_id")
+	new_post.url = "/post/" + Random::Secure.urlsafe_base64(8, padding: true).to_s
+	new_post.username = env.session.string("username")
 	new_post.ups = 0
 	new_post.downs = 0
 	new_post.views = 0
@@ -56,23 +56,8 @@ get "/post/:post_url" do |env|
 	end
 
 	if the_post
-		the_user = User.find(the_post.user_id)
 
-		if the_user
-			username = the_user.username
-		end
-
-
-		post = {
-			"title" => the_post.title,
-			"text" => the_post.text,
-			"url" => "/post/#{the_post.url}",
-			"username" => username,
-			"ups" => the_post.ups,
-			"downs" => the_post.downs,
-			"views" => the_post.views,
-			"clicks" => the_post.clicks
-		}
+		post = the_post.to_json
 
 		render "src/views/read.ecr", "src/views/layout.ecr"
 	end
