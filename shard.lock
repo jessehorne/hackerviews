@@ -1,0 +1,42 @@
+version: 1.0
+shards:
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.5.0
+
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: 0.1.0
+
+  exception_page:
+    github: crystal-loot/exception_page
+    version: 0.1.1
+
+  granite:
+    github: amberframework/granite
+    version: 0.14.0
+
+  kemal:
+    github: kemalcr/kemal
+    version: 0.24.0
+
+  kemal-flash:
+    github: neovintage/kemal-flash
+    version: 0.1.0
+
+  kemal-session:
+    github: kemalcr/kemal-session
+    version: 0.10.0
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.4.0
+
+  mysql:
+    github: crystal-lang/crystal-mysql
+    version: 0.5.0
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.8
+

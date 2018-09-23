@@ -1,0 +1,28 @@
+name: hackerviews
+version: 0.1.0
+
+authors:
+  - Jesse Horne <j.horne2796@gmail.com>
+
+targets:
+  hackerviews:
+    main: src/hackerviews.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  dotenv:
+    github: gdotdesign/cr-dotenv
+  granite:
+    github: amberframework/granite
+  mysql:
+    github: crystal-lang/crystal-mysql
+  kemal-session:
+    github: kemalcr/kemal-session
+  kemal-flash:
+    github: neovintage/kemal-flash
+    version: 0.1.0
+
+crystal: 0.26.1
+
+license: MIT

@@ -1,0 +1,9 @@
+<% content_for "body" do %>
+	<h2>Account</h2>
+	<p>Username: <%= env.session.string("username") %></p>
+	<p>Role: <%= env.session.string("role") %></p>
+	<form action="/user/update" method="POST">
+		<textarea name="about" rows="5" cols="50"><%= env.session.string("about") %></textarea>
+		<button type="submit">Update</button>
+	</form>
+<% end %>

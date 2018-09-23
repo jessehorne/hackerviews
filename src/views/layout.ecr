@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title><%= ENV["APP_TITLE"] %></title>
+
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body>
+		<div class="hv-container">
+			<div class="hv-nav">
+				<div class="hv-nav-brand"><a href="/">HV</a></div>
+				<div class="hv-nav-left">
+					<a href="#">new</a> |
+					<a href="#">top</a> |
+					<a href="#">show</a> |
+					<a href="#">ask</a> |
+					<a href="#">jobs</a>
+				</div>
+				<div class="hv-nav-right">
+					<a href="/submit">submit</a> |
+					<% if env.session.bool?("user_logged_in") %>
+						<a href="/account"><%= env.session.string("username") %></a> |
+						<a href="/logout">logout</a>
+					<% else %>
+						<a href="/login">login</a> |
+						<a href="/register">register</a>
+					<% end %>
+				</div>
+			</div>
+
+			<%= yield_content "body" %>
+		</div>
+	</body>
+</html>

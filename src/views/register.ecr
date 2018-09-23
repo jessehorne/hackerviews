@@ -1,0 +1,13 @@
+<% content_for "body" do %>
+	<% if validation_errors.size > 0 %>
+		<% validation_errors.each do |err| %>
+			<div class="hv-alert"><%= err %></div>
+		<% end %>
+	<% end %>
+	<form action="/user/register" method="POST">
+		<input type="text" name="username" placeholder="Username"><br>
+		<input type="password" name="password" placeholder="Password"><br>
+		<textarea rows="5" cols="50" name="about" placeholder="About you..."></textarea><br>
+		<button type="submit">Register</button> <a href="/login">Login</a>
+	</form>
+<% end %>

@@ -1,0 +1,7 @@
+<% content_for "body" do %>
+	<% if post %>
+		<h2><a href="/<%= post["url"] %>"><%= post["title"] %></a></h2><div class="hv-post-author"> by <a href="/user/<%= post["username"] %>"><%= post["username"] %></a></div>
+		<h4>Ups - <b><%= post["ups"] %></b> | Downs - <b><%= post["downs"] %></b> | Views - <b><%= post["views"] %></b> | Clicks - <b><%= post["clicks"] %></b></h4>
+		<div class="hv-post-text"><%= post["text"] %></div>
+	<% end %>
+<% end %>
