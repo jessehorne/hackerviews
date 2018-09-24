@@ -44,7 +44,7 @@ document.body.onload = (function() {
 		var hours = Math.floor(res / 3600) % 24;
 		var minutes = Math.floor(res / 60) % 60;
 		var seconds = Math.floor(res % 60);
-		var age_text = `${days} days - ${hours} hours - ${minutes} minutes - ${seconds} seconds`;
+		var age_text = `${days} d - ${hours} h - ${minutes} m - ${seconds} s`;
 
 
 		var ups_downs_text = `Ups/Downs: <b>${post['ups']}</b>/<b>${post['downs']}</b> |`;

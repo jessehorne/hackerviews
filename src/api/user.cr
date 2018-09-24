@@ -13,6 +13,12 @@ post "/user/register" do |env|
 	# validation
 	validation_errors = [] of String
 
+	existing_user = User.find_by(username: username)
+
+	if existing_user
+		validation_errors << "A user already exists with that username."
+	end
+
 	if username.size < 8
 		validation_errors << "Your username must be at least 8 characters."
 	end

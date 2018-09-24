@@ -27,9 +27,9 @@ require "./models/post"
 require "./models/comment"
 
 # Drop tables if they exist and create them
-User.migrator.drop_and_create
-Post.migrator.drop_and_create
-Comment.migrator.drop_and_create
+# User.migrator.drop_and_create
+# Post.migrator.drop_and_create
+# Comment.migrator.drop_and_create
 
 # Session Configuration
 Kemal::Session.config do |config|
