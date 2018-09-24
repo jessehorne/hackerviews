@@ -232,6 +232,11 @@ get "/post/jobs/:page" do |env|
 end
 
 get "/post/upvote/:post_id" do |env|
+	if !env.session.bool?("user_logged_in")
+		env.flash["validation_errors"] = ["You must login to access this."].to_json
+		env.redirect "/login"
+	end
+
 	post_id = env.params.url["post_id"].to_i64
 	username = env.session.string("username")
 	the_post = Post.find post_id
@@ -258,6 +263,11 @@ get "/post/upvote/:post_id" do |env|
 end
 
 get "/post/downvote/:post_id" do |env|
+	if !env.session.bool?("user_logged_in")
+		env.flash["validation_errors"] = ["You must login to access this."].to_json
+		env.redirect "/login"
+	end
+	
 	post_id = env.params.url["post_id"].to_i64
 	username = env.session.string("username")
 	the_post = Post.find post_id

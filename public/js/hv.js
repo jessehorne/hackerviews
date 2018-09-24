@@ -161,7 +161,7 @@ document.body.onload = (function() {
 		var views_clicks_text = `Views/Clicks: <b>${post['views']}</b>/<b>${post['clicks']}</b> |`;
 		var author_text = `Author: <a href="/user/${post['username']}" class='hv-list-author'>${post['username']}</a> |`;
 		var age_text = `Age: <b class='hv-post-age'>${age_text}</b> |`;
-		var comments_text = `<a href='/post/comments/${post['id']}'><b>${post['comments']}</b> comments</a>`;
+		var comments_text = `<a href="${post['url']}"><b>${post['comments']}</b> comments</a>`;
 		var all_text = ups_downs_text + views_clicks_text + author_text + age_text + comments_text;
 		stats_header.innerHTML = all_text;
 		list_item.appendChild(stats_header);
