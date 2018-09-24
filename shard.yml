@@ -22,6 +22,8 @@ dependencies:
   kemal-flash:
     github: neovintage/kemal-flash
     version: 0.1.0
+  micrate:
+    github: juanedi/micrate
 
 crystal: 0.26.1
 

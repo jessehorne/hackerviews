@@ -6,13 +6,27 @@ document.body.onload = (function() {
 	hv.list.list = document.getElementById("hv-list");
 
 	hv.list.page = 1;
-	hv.list.filter = "new";
+
+	if (localStorage.getItem("hv_filter") !== null) {
+		hv.list.filter = localStorage.getItem("hv_filter");
+	} else {
+		hv.list.filter = "new";
+	}
 
 	hv.times = {}
 
 	hv.times["home"] = 10; // Updates the home page every 10 seconds
 
 	hv.comments = {};
+
+	hv.set_filter = function(filter) {
+		hv.list.filter = filter;
+		localStorage.setItem("hv_filter", filter);
+	}
+
+	hv.get_filter = function() {
+		return localStorage.getItem("hv_filter");
+	}
 
 	hv.comments.update = function(post_id) {
 		var comments = document.getElementById("hv-comments");
@@ -32,7 +46,6 @@ document.body.onload = (function() {
 
 					if (!existing) {
 						hv.comments.create(item);
-						console.log("created!")
 					}
 				});
 			}
@@ -126,6 +139,37 @@ document.body.onload = (function() {
 
 	hv.gets["home"] = function() {
 		if (window.location.pathname == "/") {
+			if ("list" in hv) {
+				hv.list.list.innerHTML = "";
+
+				var pagination = document.getElementById("hv-list-pagination");
+				pagination.innerHTML = "";
+
+				var p = document.createElement("p");
+				p.innerHTML = "page: " + hv.list.page;
+				pagination.appendChild(p);
+
+				if (hv.list.page > 1) {
+					var link = document.createElement("a");
+					link.href = "javascript:void(0);";
+					link.innerHTML = "previous";
+					link.onclick = function() {
+						hv.list.page -= 1;
+						hv.gets["home"]();
+					}
+					pagination.appendChild(link);
+				}
+
+				var link = document.createElement("a");
+				link.href = "javascript:void(0);";
+				link.innerHTML = "next";
+				link.onclick = function() {
+					hv.list.page += 1;
+					hv.gets["home"]();
+				}
+				pagination.appendChild(link);
+			}
+
 			var path = "/post/" + hv.list.filter + "/" + hv.list.page;
 
 			var req = new XMLHttpRequest();
@@ -157,28 +201,33 @@ document.body.onload = (function() {
 
 	// Handle nav onclick functionality
 	hv.navs["new"].onclick = function() {
-		hv.list.filter = "new";
+		hv.set_filter("new");
 		hv.update();
+		window.location.href = "/";
 	}
 
 	hv.navs["top"].onclick = function() {
-		hv.list.filter = "top";
+		hv.set_filter("top");
 		hv.update();
+		window.location.href = "/";
 	}
 
 	hv.navs["show"].onclick = function() {
-		hv.list.filter = "show";
+		hv.set_filter("show");
 		hv.update();
+		window.location.href = "/";
 	}
 
 	hv.navs["ask"].onclick = function() {
-		hv.list.filter = "ask";
+		hv.set_filter("ask");
 		hv.update();
+		window.location.href = "/";
 	}
 
 	hv.navs["jobs"].onclick = function() {
-		hv.list.filter = "jobs";
+		hv.set_filter("jobs");
 		hv.update();
+		window.location.href = "/";
 	}
 
 	hv.intervals = {}
@@ -188,8 +237,6 @@ document.body.onload = (function() {
 		if ("home" in hv.intervals) {
 			clearInterval(hv.intervals["home"]);
 		}
-
-		hv.list.list.innerHTML = "";
 
 		hv.gets["home"]()
 		hv.intervals["home"] = setInterval(hv.gets["home"], hv.times["home"]*1000);

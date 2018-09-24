@@ -49,8 +49,8 @@ post "/user/register" do |env|
 
 		begin
 			new_user.save!
-		rescue
-			env.flash["validation_errors"] = ["Validation passed but there was an error."].to_json
+		rescue ex
+			env.flash["validation_errors"] = [ex.message].to_json
 
 			env.redirect "/register"
 		else

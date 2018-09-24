@@ -1,0 +1,24 @@
+#! /usr/bin/env crystal
+#
+# To build a standalone command line client, require the
+# driver you wish to use and use `Micrate::Cli`.
+#
+
+require "micrate"
+require "mysql"
+require "dotenv"
+
+# Load .env file
+Dotenv.load!
+
+# Setup Granite
+name = ENV["DB_NAME"]
+host = ENV["DB_HOST"]
+port = ENV["DB_PORT"]
+user = ENV["DB_USER"]
+pass = ENV["DB_PASS"]
+
+db_url = "mysql://#{user}:#{pass}@#{host}:#{port}/#{name}"
+
+Micrate::DB.connection_url = db_url
+Micrate::Cli.run

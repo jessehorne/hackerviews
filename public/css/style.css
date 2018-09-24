@@ -185,3 +185,13 @@ html, body {
 .hv-comment-text {
 	font-size: 18px;
 }
+
+.hv-list-pagination p {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.hv-list-pagination a {
+	display: inline-block;
+	margin-left: 10px;
+}
