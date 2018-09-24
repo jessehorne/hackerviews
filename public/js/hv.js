@@ -93,11 +93,55 @@ document.body.onload = (function() {
 	}
 
 
+	hv.navs = {}
+
+	hv.navs["new"] = document.getElementById("nav-new");
+	hv.navs["top"] = document.getElementById("nav-top");
+	hv.navs["show"] = document.getElementById("nav-show");
+	hv.navs["ask"] = document.getElementById("nav-ask");
+	hv.navs["jobs"] = document.getElementById("nav-jobs");
+
+	// Handle nav onclick functionality
+	hv.navs["new"].onclick = function() {
+		hv.list.filter = "new";
+		hv.update();
+	}
+
+	hv.navs["top"].onclick = function() {
+		hv.list.filter = "top";
+		hv.update();
+	}
+
+	hv.navs["show"].onclick = function() {
+		hv.list.filter = "show";
+		hv.update();
+	}
+
+	hv.navs["ask"].onclick = function() {
+		hv.list.filter = "ask";
+		hv.update();
+	}
+
+	hv.navs["jobs"].onclick = function() {
+		hv.list.filter = "jobs";
+		hv.update();
+	}
+
 	hv.intervals = {}
 
 	// Calls gets["home"] every five seconds which updates the home page list
-	hv.gets["home"]()
-	hv.intervals["home"] = setInterval(hv.gets["home"], hv.times["home"]*1000);
+	hv.update = function() {
+		if ("home" in hv.intervals) {
+			clearInterval(hv.intervals["home"]);
+		}
+
+		hv.list.list.innerHTML = "";
+
+		hv.gets["home"]()
+		hv.intervals["home"] = setInterval(hv.gets["home"], hv.times["home"]*1000);
+	}
+
+	hv.update();
 
 	console.log("hv.js loaded!");
 });
