@@ -157,3 +157,31 @@ get "/account" do |env|
 
 	render "src/views/account.ecr", "src/views/layout.ecr"
 end
+
+get "/user/:username" do |env|
+	if !env.session.bool?("user_logged_in")
+		env.redirect "/"
+	end
+
+	the_user = User.find_by(username: env.params.url["username"])
+
+	if the_user
+		if the_user.role == 1
+			role = "User"
+		elsif the_user.role == 2
+			role = "Moderator"
+		elsif the_user.role == 3
+			role = "Administrator"
+		end
+
+		user = {
+			"username" => the_user.username,
+			"role" => role,
+			"about" => the_user.about
+		}
+
+		render "src/views/user.ecr", "src/views/layout.ecr"
+	else
+		env.redirect "/"
+	end
+end

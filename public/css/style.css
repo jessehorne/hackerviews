@@ -162,3 +162,7 @@ html, body {
 .hv-post-author a {
 	color: black;
 }
+
+.hv-post-age {
+	font-size: 14px;
+}

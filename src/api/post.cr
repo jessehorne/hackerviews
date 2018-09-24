@@ -44,7 +44,7 @@ post "/post/submit" do |env|
 	else
 		env.flash["validation_errors"] = ["You have submitted a post successfully."].to_json
 
-		env.redirect "/post/#{new_post.url}"
+		env.redirect "#{new_post.url}"
 	end
 end
 
