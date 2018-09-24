@@ -12,6 +12,60 @@ document.body.onload = (function() {
 
 	hv.times["home"] = 10; // Updates the home page every 10 seconds
 
+	hv.comments = {};
+
+	hv.comments.update = function(post_id) {
+		var comments = document.getElementById("hv-comments");
+
+		var path = "/post/comments/" + post_id;
+
+		var req = new XMLHttpRequest();
+
+		req.open("GET", "http://localhost:3000" + path, true);
+
+		req.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var comments = JSON.parse(req.responseText);
+
+				comments.forEach(function(item) {
+					var existing = document.getElementById("hv_comment_" + item["id"]);
+
+					if (!existing) {
+						hv.comments.create(item);
+						console.log("created!")
+					}
+				});
+			}
+		};
+
+		req.send();
+	}
+
+	hv.comments.create = function(comment) {
+		var comments = document.getElementById("hv-comments");
+		var list_item = document.createElement("li");
+		list_item.className = "hv-comment";
+		list_item.id = "hv_comment_" + comment["id"];
+
+		var author = document.createElement("a");
+		author.href = "/user/" + comment["username"];
+		author.className = "hv-comment-author";
+		author.innerHTML = comment["username"];
+		list_item.appendChild(author);
+
+		var text = document.createElement("div");
+		text.className = "hv-comment-text";
+		text.innerHTML = comment["text"];
+		list_item.appendChild(text);
+
+		comments.appendChild(list_item);
+	}
+
+	hv.comments.clear = function() {
+		var comments = document.getElementById("hv-comments");
+		comments.innerHTML = "";
+	}
+
 	hv.list.create_or_update = function(post) {
 		var existing = document.getElementById("hv_post_" + post["id"]);
 
@@ -141,7 +195,9 @@ document.body.onload = (function() {
 		hv.intervals["home"] = setInterval(hv.gets["home"], hv.times["home"]*1000);
 	}
 
-	hv.update();
+	if (window.location.pathname == "/") {
+		hv.update();
+	}
 
 	console.log("hv.js loaded!");
 });

@@ -1,7 +1,31 @@
 <% content_for "body" do %>
-	<% if post %>
-		<h2><a href="/<%= post["url"] %>"><%= post["title"] %></a></h2><div class="hv-post-author"> by <a href="/user/<%= post["username"] %>"><%= post["username"] %></a></div>
-		<h4>Ups - <b><%= post["ups"] %></b> | Downs - <b><%= post["downs"] %></b> | Views - <b><%= post["views"] %></b> | Clicks - <b><%= post["clicks"] %></b></h4>
-		<div class="hv-post-text"><%= post["text"] %></div>
-	<% end %>
+	<h2><a href="<%= post["url"] %>"><%= post["title"] %></a></h2>
+
+	<div class="hv-post-author"> by <a href="/user/<%= post["username"] %>"><%= post["username"] %></a></div>
+
+	<h4>Ups - <b><%= post["ups"] %></b> | Downs - <b><%= post["downs"] %></b> | Views - <b><%= post["views"] %></b> | Clicks - <b><%= post["clicks"] %></b></h4>
+	<div class="hv-post-text"><%= post["text"] %></div>
+
+	<form action="/comment/submit" method="POST">
+		<input type="hidden" name="post_id" value="<%= post["id"] %>"><br>
+		<textarea rows="10" cols="100" name="text" placeholder="comment text..."></textarea><br>
+		<button type="submit">Submit</button>
+	</form>
+
+	<ul class="hv-comments" id="hv-comments"></ul>
+
+	<script type="text/javascript">
+		setTimeout(function() {
+			hv_update_func = function() {
+				hv.comments.update("<%= post["id"] %>");
+			}
+
+			hv_update_comments = setInterval(hv_update_func, 10000)
+			hv_update_func();
+
+			document.body.onunload = function() {
+				clearInterval(hv_update_comments);
+			}
+		}, 1000);
+	</script>
 <% end %>

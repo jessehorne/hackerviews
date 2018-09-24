@@ -49,7 +49,7 @@ post "/post/submit" do |env|
 end
 
 get "/post/:post_url" do |env|
-	the_post = Post.find_by(url: env.params.url["post_url"])
+	the_post = Post.find_by(url: "/post/" + env.params.url["post_url"].as(String))
 
 	if !the_post
 		env.redirect "/"
@@ -57,7 +57,18 @@ get "/post/:post_url" do |env|
 
 	if the_post
 
-		post = the_post.to_json
+		new_post = {
+			"id" => the_post.id,
+			"title" => the_post.title,
+			"username" => the_post.username,
+			"ups" => the_post.ups,
+			"downs" => the_post.downs,
+			"views" => the_post.views,
+			"clicks" => the_post.clicks,
+			"text" => the_post.text,
+			"url" => the_post.url
+		}
+		post = new_post
 
 		render "src/views/read.ecr", "src/views/layout.ecr"
 	end

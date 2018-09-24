@@ -43,6 +43,7 @@ end
 require "./api/auth.cr"
 require "./api/user.cr"
 require "./api/post.cr"
+require "./api/comment.cr"
 
 # Base route
 get "/" do |env|

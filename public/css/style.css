@@ -166,3 +166,22 @@ html, body {
 .hv-post-age {
 	font-size: 14px;
 }
+
+.hv-comments {
+	list-style: none;
+}
+
+.hv-comment {
+	width: 100%;
+	background-color: rgba(200, 200, 200, 0.2);
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.hv-comment-author {
+	font-size: 14px;
+}
+
+.hv-comment-text {
+	font-size: 18px;
+}
