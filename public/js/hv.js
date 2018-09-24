@@ -53,7 +53,7 @@ document.body.onload = (function() {
 
 
 		var ups_downs_text = `Ups/Downs: <b>${post['ups']}</b>/<b>${post['downs']}</b> |`;
-		var views_clicks_text = `View/Click: <b>${post['views']}</b>/<b>${post['clicks']}</b> |`;
+		var views_clicks_text = `Views/Clicks: <b>${post['views']}</b>/<b>${post['clicks']}</b> |`;
 		var author_text = `Author: <a href="/user/${post['username']}" class='hv-list-author'>${post['username']}</a> |`;
 		var age_text = `Age: <b class='hv-post-age'>${age_text}</b> |`;
 		var comments_text = `<a href='/post/comments/${post['id']}'><b>000</b> comments</a>`;
