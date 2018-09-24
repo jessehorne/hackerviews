@@ -80,9 +80,30 @@ get "/post/new/:page" do |env|
 	limit = 2
 	offset = (limit * page_num) - limit
 
-	posts = Post.all("ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+	posts = Post.all("ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
 
-	posts
+	new_posts = [] of Hash(String, String | Int32 | Int64 | Time | Nil)
+
+	posts.each { |p|
+		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		new_post = {
+			"id" => p.id,
+			"created_at" => p.created_at,
+			"title" => p.title,
+			"url" => p.url,
+			"username" => p.username,
+			"ups" => p.ups,
+			"downs" => p.downs,
+			"views" => p.views,
+			"clicks" => p.clicks,
+			"comments" => comment_count
+		}
+
+		new_posts << new_post
+	}
+
+	new_posts.to_json
 end
 
 get "/post/top/:page" do |env|
@@ -91,9 +112,30 @@ get "/post/top/:page" do |env|
 	limit = 2
 	offset = (limit * page_num) - limit
 
-	posts = Post.all("ORDER BY ups DESC LIMIT #{limit} OFFSET #{offset}").to_json
+	posts = Post.all("ORDER BY ups DESC LIMIT #{limit} OFFSET #{offset}")
 
-	posts
+	new_posts = [] of Hash(String, String | Int32 | Int64 | Time | Nil)
+
+	posts.each { |p|
+		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		new_post = {
+			"id" => p.id,
+			"created_at" => p.created_at,
+			"title" => p.title,
+			"url" => p.url,
+			"username" => p.username,
+			"ups" => p.ups,
+			"downs" => p.downs,
+			"views" => p.views,
+			"clicks" => p.clicks,
+			"comments" => comment_count
+		}
+
+		new_posts << new_post
+	}
+
+	new_posts.to_json
 end
 
 get "/post/show/:page" do |env|
@@ -131,9 +173,30 @@ get "/post/ask/:page" do |env|
 	limit = 2
 	offset = (limit * page_num) - limit
 
-	posts = Post.all("WHERE title LIKE '%Ask HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+	posts = Post.all("WHERE title LIKE '%Ask HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
 
-	posts
+	new_posts = [] of Hash(String, String | Int32 | Int64 | Time | Nil)
+
+	posts.each { |p|
+		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		new_post = {
+			"id" => p.id,
+			"created_at" => p.created_at,
+			"title" => p.title,
+			"url" => p.url,
+			"username" => p.username,
+			"ups" => p.ups,
+			"downs" => p.downs,
+			"views" => p.views,
+			"clicks" => p.clicks,
+			"comments" => comment_count
+		}
+
+		new_posts << new_post
+	}
+
+	new_posts.to_json
 end
 
 get "/post/jobs/:page" do |env|
@@ -142,9 +205,30 @@ get "/post/jobs/:page" do |env|
 	limit = 2
 	offset = (limit * page_num) - limit
 
-	posts = Post.all("WHERE title LIKE '%Hire HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+	posts = Post.all("WHERE title LIKE '%Hire HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
 
-	posts
+	new_posts = [] of Hash(String, String | Int32 | Int64 | Time | Nil)
+
+	posts.each { |p|
+		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		new_post = {
+			"id" => p.id,
+			"created_at" => p.created_at,
+			"title" => p.title,
+			"url" => p.url,
+			"username" => p.username,
+			"ups" => p.ups,
+			"downs" => p.downs,
+			"views" => p.views,
+			"clicks" => p.clicks,
+			"comments" => comment_count
+		}
+
+		new_posts << new_post
+	}
+
+	new_posts.to_json
 end
 
 get "/post/upvote/:post_id" do |env|
