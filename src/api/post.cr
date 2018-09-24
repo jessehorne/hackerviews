@@ -146,3 +146,55 @@ get "/post/jobs/:page" do |env|
 
 	posts
 end
+
+get "/post/upvote/:post_id" do |env|
+	post_id = env.params.url["post_id"].to_i64
+	username = env.session.string("username")
+	the_post = Post.find post_id
+
+	if the_post
+		ups = the_post.ups
+		if ups
+			existing_vote = Vote.find_by(post_id: post_id, vote_type: "up", username: username)
+
+			if !existing_vote
+				the_post.ups = (ups + 1)
+				the_post.save!
+
+				new_vote = Vote.new
+				new_vote.post_id = post_id
+				new_vote.vote_type = "up"
+				new_vote.username = username
+				new_vote.save!
+			end
+		end
+	else
+		env.redirect "/"
+	end
+end
+
+get "/post/downvote/:post_id" do |env|
+	post_id = env.params.url["post_id"].to_i64
+	username = env.session.string("username")
+	the_post = Post.find post_id
+
+	if the_post
+		downs = the_post.downs
+		if downs
+			existing_vote = Vote.find_by(post_id: post_id, vote_type: "down", username: username)
+
+			if !existing_vote
+				the_post.downs = (downs + 1)
+				the_post.save!
+
+				new_vote = Vote.new
+				new_vote.post_id = post_id
+				new_vote.vote_type = "down"
+				new_vote.username = username
+				new_vote.save!
+			end
+		end
+	else
+		env.redirect "/"
+	end
+end

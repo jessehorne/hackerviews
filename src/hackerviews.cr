@@ -25,6 +25,7 @@ require "json"
 require "./models/user"
 require "./models/post"
 require "./models/comment"
+require "./models/vote"
 
 # Drop tables if they exist and create them
 # User.migrator.drop_and_create

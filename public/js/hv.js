@@ -28,6 +28,38 @@ document.body.onload = (function() {
 		return localStorage.getItem("hv_filter");
 	}
 
+	hv.upvote = function(id) {
+		var path = "/post/upvote/" + id;
+
+		var req = new XMLHttpRequest();
+
+		req.open("GET", "http://localhost:3000" + path, true);
+
+		req.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				hv.gets["home"]();
+			}
+		};
+
+		req.send();
+	}
+
+	hv.downvote = function(id) {
+		var path = "/post/downvote/" + id;
+
+		var req = new XMLHttpRequest();
+
+		req.open("GET", "http://localhost:3000" + path, true);
+
+		req.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				hv.gets["home"]();
+			}
+		};
+
+		req.send();
+	}
+
 	hv.comments.update = function(post_id) {
 		var comments = document.getElementById("hv-comments");
 
@@ -91,10 +123,16 @@ document.body.onload = (function() {
 
 		var up_img = document.createElement("img");
 		up_img.src = "/up.png";
+		up_img.onclick = function() {
+			hv.upvote(post["id"]);
+		}
 		updown_div.appendChild(up_img);
 
 		var down_img = document.createElement("img");
 		down_img.src = "/down.png";
+		down_img.onclick = function() {
+			hv.downvote(post["id"]);
+		}
 		updown_div.appendChild(down_img);
 
 		list_item.appendChild(updown_div);
