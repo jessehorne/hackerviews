@@ -102,7 +102,7 @@ get "/post/show/:page" do |env|
 	limit = 2
 	offset = (limit * page_num) - limit
 
-	posts = Post.all("WHERE title LIKE '%SHOW HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
+	posts = Post.all("WHERE title LIKE '%Show HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
 
 	new_posts = [] of Hash(String, String | Int32 | Int64 | Time | Nil)
 
@@ -131,11 +131,18 @@ get "/post/ask/:page" do |env|
 	limit = 2
 	offset = (limit * page_num) - limit
 
-	posts = Post.all("WHERE title LIKE '%ASK HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+	posts = Post.all("WHERE title LIKE '%Ask HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
 
 	posts
 end
 
 get "/post/jobs/:page" do |env|
+	page_num = env.params.url["page"].to_i
 
+	limit = 2
+	offset = (limit * page_num) - limit
+
+	posts = Post.all("WHERE title LIKE '%Hire HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}").to_json
+
+	posts
 end
