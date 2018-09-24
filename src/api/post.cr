@@ -77,7 +77,7 @@ end
 get "/post/new/:page" do |env|
 	page_num = env.params.url["page"].to_i
 
-	limit = 2
+	limit = 20
 	offset = (limit * page_num) - limit
 
 	posts = Post.all("ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
@@ -109,7 +109,7 @@ end
 get "/post/top/:page" do |env|
 	page_num = env.params.url["page"].to_i
 
-	limit = 2
+	limit = 20
 	offset = (limit * page_num) - limit
 
 	posts = Post.all("ORDER BY ups DESC LIMIT #{limit} OFFSET #{offset}")
@@ -141,7 +141,7 @@ end
 get "/post/show/:page" do |env|
 	page_num = env.params.url["page"].to_i
 
-	limit = 2
+	limit = 20
 	offset = (limit * page_num) - limit
 
 	posts = Post.all("WHERE title LIKE '%Show HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
@@ -170,7 +170,7 @@ end
 get "/post/ask/:page" do |env|
 	page_num = env.params.url["page"].to_i
 
-	limit = 2
+	limit = 20
 	offset = (limit * page_num) - limit
 
 	posts = Post.all("WHERE title LIKE '%Ask HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
@@ -202,7 +202,7 @@ end
 get "/post/jobs/:page" do |env|
 	page_num = env.params.url["page"].to_i
 
-	limit = 2
+	limit = 20
 	offset = (limit * page_num) - limit
 
 	posts = Post.all("WHERE title LIKE '%Hire HV:%' ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}")
@@ -267,7 +267,7 @@ get "/post/downvote/:post_id" do |env|
 		env.flash["validation_errors"] = ["You must login to access this."].to_json
 		env.redirect "/login"
 	end
-	
+
 	post_id = env.params.url["post_id"].to_i64
 	username = env.session.string("username")
 	the_post = Post.find post_id
