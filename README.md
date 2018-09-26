@@ -1,18 +1,38 @@
 # hackerviews
 
+<div style="text-align: center;"><img src="https://raw.githubusercontent.com/jessehorne/hackerviews/master/images/logo_big.png"></div>
+
+---
+
 Hacker Views is a social platform for developers, inspired by [Hacker News](https://news.ycombinator.com/), designed to give more data to users about their posts.
+
+![screenshot](https://raw.githubusercontent.com/jessehorne/hackerviews/master/images/screenshot.png)
+
+---
+
+#### Note
+Things will be changing quite a bit. The current version is just a rough prototype. If any sort of community forms, I will set up a Slack and potentially an Email list. For general inspiration on running a community, see [Open Source Guides](https://opensource.guide/).
+
+---
 
 ## Installation
 
-TODO: Write installation instructions here
+1. Install [Crystal](https://crystal-lang.org)
+2. Pull the repository
+3. Run 'shards install' in the projects root directory
+4. Create '.env' in root project directory (see .env.example)
+5. Create MySQL Database according to values in '.env'
+6. Run './src/micrate up' in root project directory to run migrations
+7. Run 'crystal run src/hackerviews.cr' in root project directory
+8. Visit 'http://localhost:3000/' in your web browser to make sure things are working!
 
-## Usage
-
-TODO: Write usage instructions here
+(better instructions coming soon...)
 
 ## Development
 
-TODO: Write development instructions here
+1. Get the application running (See Installation)
+2. If you find bugs, first create an issue.
+3. If you'd like to close tickets or implement your own ideas, see Contributing
 
 ## Contributing
 
