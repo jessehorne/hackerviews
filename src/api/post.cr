@@ -87,6 +87,24 @@ get "/post/new/:page" do |env|
 	posts.each { |p|
 		comment_count = Comment.all("WHERE post_id = #{p.id}").size
 
+		if env.session.bool?("user_logged_in")
+			existing_view = View.find_by(post_id: p.id, username: env.session.string("username"))
+
+			if !existing_view
+				new_view = View.new
+				new_view.post_id = p.id
+				new_view.username = env.session.string("username")
+				new_view.save!
+
+				current_views = p.views
+				if current_views
+					current_views += 1
+				end
+				p.views = current_views
+				p.save
+			end
+		end
+
 		new_post = {
 			"id" => p.id,
 			"created_at" => p.created_at,
@@ -119,6 +137,24 @@ get "/post/top/:page" do |env|
 	posts.each { |p|
 		comment_count = Comment.all("WHERE post_id = #{p.id}").size
 
+		if env.session.bool?("user_logged_in")
+			existing_view = View.find_by(post_id: p.id, username: env.session.string("username"))
+
+			if !existing_view
+				new_view = View.new
+				new_view.post_id = p.id
+				new_view.username = env.session.string("username")
+				new_view.save!
+
+				current_views = p.views
+				if current_views
+					current_views += 1
+				end
+				p.views = current_views
+				p.save
+			end
+		end
+
 		new_post = {
 			"id" => p.id,
 			"created_at" => p.created_at,
@@ -149,6 +185,26 @@ get "/post/show/:page" do |env|
 	new_posts = [] of Hash(String, String | Int32 | Int64 | Time | Nil)
 
 	posts.each { |p|
+		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		if env.session.bool?("user_logged_in")
+			existing_view = View.find_by(post_id: p.id, username: env.session.string("username"))
+
+			if !existing_view
+				new_view = View.new
+				new_view.post_id = p.id
+				new_view.username = env.session.string("username")
+				new_view.save!
+
+				current_views = p.views
+				if current_views
+					current_views += 1
+				end
+				p.views = current_views
+				p.save
+			end
+		end
+
 		new_post = {
 			"id" => p.id,
 			"created_at" => p.created_at,
@@ -158,7 +214,8 @@ get "/post/show/:page" do |env|
 			"ups" => p.ups,
 			"downs" => p.downs,
 			"views" => p.views,
-			"clicks" => p.clicks
+			"clicks" => p.clicks,
+			"comments" => comment_count
 		}
 
 		new_posts << new_post
@@ -179,6 +236,24 @@ get "/post/ask/:page" do |env|
 
 	posts.each { |p|
 		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		if env.session.bool?("user_logged_in")
+			existing_view = View.find_by(post_id: p.id, username: env.session.string("username"))
+
+			if !existing_view
+				new_view = View.new
+				new_view.post_id = p.id
+				new_view.username = env.session.string("username")
+				new_view.save!
+
+				current_views = p.views
+				if current_views
+					current_views += 1
+				end
+				p.views = current_views
+				p.save
+			end
+		end
 
 		new_post = {
 			"id" => p.id,
@@ -211,6 +286,24 @@ get "/post/jobs/:page" do |env|
 
 	posts.each { |p|
 		comment_count = Comment.all("WHERE post_id = #{p.id}").size
+
+		if env.session.bool?("user_logged_in")
+			existing_view = View.find_by(post_id: p.id, username: env.session.string("username"))
+
+			if !existing_view
+				new_view = View.new
+				new_view.post_id = p.id
+				new_view.username = env.session.string("username")
+				new_view.save!
+
+				current_views = p.views
+				if current_views
+					current_views += 1
+				end
+				p.views = current_views
+				p.save
+			end
+		end
 
 		new_post = {
 			"id" => p.id,
