@@ -49,6 +49,11 @@ post "/post/submit" do |env|
 end
 
 get "/post/:post_url" do |env|
+	if !env.session.bool?("user_logged_in")
+		env.flash["validation_errors"] = ["You must login to access this."].to_json
+		env.redirect "/login"
+	end
+	
 	the_post = Post.find_by(url: "/post/" + env.params.url["post_url"].as(String))
 
 	if !the_post
