@@ -27,6 +27,7 @@ require "./models/post"
 require "./models/comment"
 require "./models/vote"
 require "./models/view"
+require "./models/click"
 
 # Drop tables if they exist and create them
 # User.migrator.drop_and_create

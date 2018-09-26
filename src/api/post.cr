@@ -53,7 +53,7 @@ get "/post/:post_url" do |env|
 		env.flash["validation_errors"] = ["You must login to access this."].to_json
 		env.redirect "/login"
 	end
-	
+
 	the_post = Post.find_by(url: "/post/" + env.params.url["post_url"].as(String))
 
 	if !the_post
@@ -61,6 +61,22 @@ get "/post/:post_url" do |env|
 	end
 
 	if the_post
+
+		existing_click = Click.find_by(post_id: the_post.id, username: env.session.string("username"))
+
+		if !existing_click
+			current_clicks = the_post.clicks
+			if current_clicks
+				current_clicks += 1
+			end
+			the_post.clicks = current_clicks
+			the_post.save
+
+			new_click = Click.new
+			new_click.post_id = the_post.id
+			new_click.username = env.session.string("username")
+			new_click.save
+		end
 
 		new_post = {
 			"id" => the_post.id,
