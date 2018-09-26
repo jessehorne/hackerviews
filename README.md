@@ -2,6 +2,8 @@
 
 <div style="text-align: center;"><img src="https://raw.githubusercontent.com/jessehorne/hackerviews/master/images/logo_big.png"></div>
 
+[Medium](https://medium.com/@jessehorne/what-i-learned-writing-a-hacker-news-clone-494c8d49a9ae)
+
 ---
 
 Hacker Views is a social platform for developers, inspired by [Hacker News](https://news.ycombinator.com/), designed to give more data to users about their posts.
@@ -41,6 +43,12 @@ Things will be changing quite a bit. The current version is just a rough prototy
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Donate
+
+If you're interested in contributing financially, you can do so with the link below. All donations will go to hosting or in some way improving the application.
+
+https://www.gofundme.com/hacker-views
 
 ## Contributors
 
