@@ -44,11 +44,6 @@ Things will be changing quite a bit. The current version is just a rough prototy
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
-## Donate
-
-If you're interested in contributing financially, you can do so with the link below. All donations will go to hosting or in some way improving the application.
-
-https://www.gofundme.com/hacker-views
 
 ## Contributors
 
